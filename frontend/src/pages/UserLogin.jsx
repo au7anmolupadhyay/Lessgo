@@ -1,12 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const UserLogin = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-white to-gray-200">
-      <div className="w-full max-w-sm p-6 bg-white shadow-lg rounded">
-        <div className="mb-6 text-center">
-          <img src="/lessgo_logo.png" alt="Lessgo Logo" className="mx-auto h-12" />
-        </div>
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-200">
+      {/* Logo at top-left */}
+      <div className="p-4">
+        <img src="/logo.png" alt="Lessgo Logo" className="h-12" />
+      </div>
+
+      {/* Login Form */}
+      <div className="px-6">
         <div className="mb-4">
           <label className="block text-gray-800 text-sm font-semibold mb-2">
             What's your email
@@ -30,7 +34,14 @@ const UserLogin = () => {
         <button className="w-full bg-black text-white py-2 rounded font-bold mb-3">
           Login
         </button>
-        <p className="text-center text-sm text-gray-600 mb-2">Create new Account</p>
+        <p className="text-center">
+          New here?
+          <Link to="/signup" className="text-blue-600 ml-2">Create new Account</Link>
+        </p>
+      </div>
+
+      {/* Sign in as Captain at bottom */}
+      <div className="mt-auto p-4">
         <button className="w-full bg-green-500 text-white py-2 rounded font-bold">
           Sign in as Captain
         </button>
