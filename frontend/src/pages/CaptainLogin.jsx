@@ -58,13 +58,13 @@ const CaptainLogin = () => {
           </button>
           <p className="text-center">
             Join a fleet?
-            <Link to="/signup" className="text-blue-600 ml-2">Register as a Captain</Link>
+            <Link to="/captain-signup" className="text-blue-600 ml-2">Register as a Captain</Link>
           </p>
         </div>
 
         <div className="mt-auto p-4">
           <Link
-            to="/captain-signup"
+            to="/login"
             className="block w-full bg-orange-500 text-white text-center py-2 rounded font-bold mb-5"
           >
             Sign in as User
