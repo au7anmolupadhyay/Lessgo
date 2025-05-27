@@ -32,7 +32,7 @@ const UserSignup = () => {
 
 
   return (
-    <form onSubmit={(e)=>(e)}>
+    <form onSubmit={(e)=>submitHandler(e)}>
       <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-200">
 
         <div className="p-4">
