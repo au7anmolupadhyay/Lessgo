@@ -13,7 +13,7 @@ const UserSignup = () => {
     e.preventDefault();
 
     setUserData({
-      userName:{
+      fullName:{
         firstName:firstName,
         lastName:lastName
       },
@@ -21,7 +21,6 @@ const UserSignup = () => {
       password:password
     })
     //console.log(userData);   this wont log the data because the state is not updated immediately so it will log the old data
-    console.log({userName, email, password});
 
     //when submitted clear the input fields
     setFirstName('');
@@ -94,21 +93,16 @@ const UserSignup = () => {
             type="submit"
             className="w-full bg-black text-white py-2 rounded font-bold mb-3"
           >
-            Login
+            Signup
           </button>
           <p className="text-center">
-            New here?
-            <Link to="/signup" className="text-blue-600 ml-2">Create new Account</Link>
+            Already have an account?
+            <Link to="/login" className="text-blue-600 ml-2">Login Here</Link>
           </p>
         </div>
 
         <div className="mt-auto p-4">
-          <Link
-            to="/captain-login"
-            className="block w-full bg-green-500 text-white text-center py-2 rounded font-bold mb-5"
-          >
-            Sign in as Captain
-          </Link>
+          <p className='ml-1 text-gray-600 text-sm leading-tight'>By proceeding, you agree to get calls, WhatsApp or SMS messages, including automated means, from Lessgo and its affiliates.</p>
         </div>
       </div>
     </form>
