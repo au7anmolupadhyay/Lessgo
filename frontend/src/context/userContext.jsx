@@ -1,4 +1,5 @@
-import React, { Children } from 'react';
+import React, { Children, useState } from 'react';
+import { createContext } from 'react';
 
 export const UserDataContext = createContext();
 
@@ -15,9 +16,9 @@ const UserContext = ({children})=>{
 
     return(
         <div>
-            <UserDataContext.provider value={{user, setUser}}>
+            <UserDataContext.Provider value={{user}}>
             {children}
-            </UserDataContext.provider>
+            </UserDataContext.Provider>
         </div>
     )
 };

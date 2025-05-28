@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 const UserSignup = () => {
 
@@ -8,19 +9,22 @@ const UserSignup = () => {
   const [userData, setUserData] = useState({});
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  
+  const navigate = useNavigate();
 
-  const submitHandler = (e)=>{
+  const submitHandler = async (e)=>{
     e.preventDefault();
 
-    setUserData({
+    const newUser ={
       fullName:{
         firstName:firstName,
         lastName:lastName
       },
       email:email,
       password:password
-    })
-    //console.log(userData);   this wont log the data because the state is not updated immediately so it will log the old data
+    }
+
+    const response = await axios.post('http://localhost:5000/api/users/signup', newUser);
 
     //when submitted clear the input fields
     setFirstName('');
@@ -93,7 +97,7 @@ const UserSignup = () => {
             type="submit"
             className="w-full bg-black text-white py-2 rounded font-bold mb-3"
           >
-            Signup
+            Create account
           </button>
           <p className="text-center">
             Already have an account?
