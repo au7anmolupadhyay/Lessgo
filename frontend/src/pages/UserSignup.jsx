@@ -41,6 +41,7 @@ const UserSignup = () => {
       if(response.status === 201){
         const data = response.data;
         setUser(data.user);
+        localStorage.setItem('token', data.token);
         
         // Only clear form and navigate on success
         setFirstName('');
