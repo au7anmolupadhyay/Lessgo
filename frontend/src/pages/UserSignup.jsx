@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { UserDataContext } from '../context/UserContext';
 
 const UserSignup = () => {
 
@@ -12,25 +13,58 @@ const UserSignup = () => {
   
   const navigate = useNavigate();
 
+  const { user, setUser } = useContext(UserDataContext);
+
   const submitHandler = async (e)=>{
     e.preventDefault();
 
-    const newUser ={
-      fullName:{
-        firstName:firstName,
-        lastName:lastName
-      },
-      email:email,
-      password:password
+    // Validate required fields
+    if (!firstName || !email || !password) {
+      alert('Please fill in all required fields');
+      return;
     }
 
-    const response = await axios.post('http://localhost:5000/api/users/signup', newUser);
+    const newUser = {
+      fullname: {
+        firstname: firstName,
+        lastname: lastName || ''  // Make lastname optional
+      },
+      email,
+      password
+    };
 
-    //when submitted clear the input fields
-    setFirstName('');
-    setLastName('')
-    setEmail('');
-    setPassword('');
+    console.log('Sending data:', newUser);
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser);
+
+      if(response.status === 201){
+        const data = response.data;
+        setUser(data.user);
+        
+        // Only clear form and navigate on success
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setPassword('');
+        
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error('Error response:', error.response?.data);
+      console.error('Status code:', error.response?.status);
+      
+      // Show specific error message to user
+      const errorMessage = error.response?.data?.message || 
+                         error.response?.data?.errors?.[0]?.msg ||
+                         'Registration failed. Please try again.';
+      alert(errorMessage);
+      
+      // If user already exists or validation error, keep the form data
+      if (error.response?.status === 400) {
+        return;
+      }
+    }
   }
 
 

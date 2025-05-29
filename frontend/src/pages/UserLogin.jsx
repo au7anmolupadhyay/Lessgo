@@ -1,22 +1,49 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { UserDataContext } from '../context/UserContext';
 
 const UserLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userData, setUserData] = useState({});
 
-  const submitHandler = (e)=>{
-    e.preventDefault();
+  const { user, setUser } = useContext(UserDataContext);
 
-    setUserData({email:email, password:password});
+  const navigate = useNavigate();
+
+  const submitHandler = async (e)=>{
+    e.preventDefault();
     //console.log(userData);   this wont log the data because the state is not updated immediately so it will log the old data
     console.log({email, password});
+
+    const userData = {
+      email:email,
+      password:password
+    }
+
+    try{
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData);
+
+      if(response.status === 200){
+        const data = response.data
+        setUser(data.user);
+        navigate('/home');
+      }
+
+      console.log(response.data);
+      
+    }catch(error){
+      console.error('Error response:', error.response?.data);
+      const errorMessage = error.response?.data?.message || 'Login failed. Please try again.';
+      alert(errorMessage);
+    }
 
     //when submitted clear the input fields
     setEmail('');
     setPassword('');
   }
+
 
   return (
     <form onSubmit={(e)=>submitHandler(e)}>
