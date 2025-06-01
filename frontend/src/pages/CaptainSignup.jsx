@@ -204,7 +204,7 @@ const CaptainSignup = () => {
             type="submit"
             className="w-full bg-black text-white py-2 rounded font-bold mb-3"
           >
-            Sign up as Captain
+            Create Captain Account
           </button>
           <p className="text-center">
             Already have an account?
