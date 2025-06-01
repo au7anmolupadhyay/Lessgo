@@ -21,15 +21,16 @@ const CaptainLogin = () => {
     try{
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/login`, captain);
       
-        if(response.status === 200){
-          const data = response.data;
-          setCaptain(data.captain);
-          localStorage.setItem('token', data.token);
-          navigate('/captain-home');
-        }
+      if(response.status === 200){
+        const data = response.data;
+        setCaptain(data.captain);
+        localStorage.setItem('token', data.captainToken); // Changed from data.token to data.captainToken
+        navigate('/captain-home');
+      }
     }
-    catch(e){;
-      console.log("Error while loggin in as captin: ", e);
+    catch(e){
+      console.error("Error while logging in as captain:", e.response?.data || e.message);
+      alert(e.response?.data?.message || 'Login failed. Please check your credentials.');
     }
 
     setEmail('');
