@@ -82,7 +82,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className='fixed w-full z-10 bottom-0 p-3 bg-white px-3 py-6'>
+      <div className='fixed w-full z-10 bottom-0 translate-y-full p-3 bg-white px-3 py-8'>
         <h3 className='text-2xl font-semibold mb-3'>Select a ride</h3>
         <div className='flex flex-col gap-3'>
           <div className='flex p-3 border border-gray-300 active:border-black transition-all duration-200 rounded-xl items-center justify-between cursor-pointer'>
