@@ -1,33 +1,31 @@
 import React from 'react';
 import 'remixicon/fonts/remixicon.css';
 
-const LocationSearchPanel = () => {
+const LocationSearchPanel = (props) => {
+  console.log(props);
+  // {sample array for location}
+  const locations = [
+    "24B, Near Kapoor's Cafe, Sheriyans School, Jaipur",
+    "Central Park Mall, Shopping District, Malviya Nagar",
+    "Jaipur International Airport, Terminal 2, Airport Road",
+    "Tech Park, Electronic City, Sitapura",
+    "M.G. Road, Jaipur",
+    "C Scheme, Jaipur",
+    "Bapu Bazaar, Jaipur",
+
+  ]
+
   return (
     <div className='pt-1'>
-      <div className='flex items-center border-2 rounded-xl mb-1.5 mx-3 active:border-black border-gray-300 gap-3 p-3 hover:bg-gray-100 cursor-pointer'>
-        <div className='w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center'>
-          <i className="ri-map-pin-line text-gray-600"></i>
-        </div>
-        <h4 className='text-[15px] text-gray-700 font-medium'>24B, Near Kapoor's Cafe, Sheriyans School, Jaipur</h4>
-      </div>
-      <div className='flex items-center border-2 rounded-xl mb-1.5 mx-3 active:border-black border-gray-300 gap-3 p-3 hover:bg-gray-100 cursor-pointer'>
-        <div className='w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center'>
-          <i className="ri-map-pin-line text-gray-600"></i>
-        </div>
-        <h4 className='text-[15px] text-gray-700 font-medium'>Central Park Mall, Shopping District, Malviya Nagar</h4>
-      </div>
-      <div className='flex items-center border-2 rounded-xl mb-1.5 mx-3 active:border-black border-gray-300 gap-3 p-3 hover:bg-gray-100 cursor-pointer'>
-        <div className='w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center'>
-          <i className="ri-map-pin-line text-gray-600"></i>
-        </div>
-        <h4 className='text-[15px] text-gray-700 font-medium'>Jaipur International Airport, Terminal 2, Airport Road</h4>
-      </div>
-      <div className='flex items-center border-2 rounded-xl mb-1.5 mx-3 active:border-black border-gray-300 gap-3 p-3 hover:bg-gray-100 cursor-pointer'>
-        <div className='w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center'>
-          <i className="ri-map-pin-line text-gray-600"></i>
-        </div>
-        <h4 className='text-[15px] text-gray-700 font-medium'>Tech Park, Electronic City, Sitapura</h4>
-      </div>
+      {locations.map(function(location){
+        return(
+        <div onClick={()=>props.setVehiclePanel(true)} className='flex items-center border-2 rounded-xl mb-1.5 mx-3 active:border-black border-gray-300 gap-3 p-3 hover:bg-gray-100 cursor-pointer'>
+          <div className='w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center'>
+            <i className="ri-map-pin-line text-gray-600"></i>
+          </div>
+          <h4 className='text-[15px] text-gray-700 font-medium'>{location}</h4>
+        </div>);
+      })}
     </div>
   );
 };
