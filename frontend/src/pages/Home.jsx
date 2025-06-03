@@ -12,7 +12,7 @@ const Home = () => {
   const panelRef = useRef(null);
   const vehiclePanelRef = useRef(null);
   const panelCloseRef = useRef(null);
-  const [vehiclePanel, setVehiclePanel] = useState(false);
+  const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -40,7 +40,7 @@ const Home = () => {
 
 
   useGSAP(()=>{
-    if(vehiclePanel){
+    if(vehiclePanelOpen){
       gsap.to(vehiclePanelRef.current, {
         transform: 'translateY(0)',
         opacity: '1',
@@ -51,7 +51,7 @@ const Home = () => {
         opacity: '0',
       })
     }
-  },[vehiclePanel]);
+  },[vehiclePanelOpen]);
 
   return (
     <div className='h-screen relative overflow-hidden'>
@@ -95,11 +95,12 @@ const Home = () => {
             </form>
           </div>
           <div ref={panelRef} className='h-0 overflow-hidden bg-white'>
-            <LocationSearchPanel vehiclePanel={vehiclePanel} setVehiclePanel={setVehiclePanel}/>
+            <LocationSearchPanel setPanelOpen={setPanelOpen} setVehiclePanelOpen={setVehiclePanelOpen}/>
           </div>
         </div>
       </div>
       <div ref={vehiclePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full p-3 bg-white px-3 py-8'>
+      <h5 className='p-3 text-center w-[93%] absolute top-0' onClick={()=>{setVehiclePanelOpen(false)}}><i className="ri-arrow-down-wide-fill"></i></h5>
         <h3 className='text-2xl font-semibold mb-3'>Select a ride</h3>
         <div className='flex flex-col gap-3'>
           <div className='flex p-3 border border-gray-300 active:border-black transition-all duration-200 rounded-xl items-center justify-between cursor-pointer'>
