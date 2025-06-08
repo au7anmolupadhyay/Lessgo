@@ -66,7 +66,8 @@ const CaptainSignup = () => {
         setVehicleCapacity('');
         setVehicleType('car');
         
-        navigate('/captain-home');
+        // Navigate to captain home
+        navigate('/captain-home', { replace: true });
       }
     } catch (error) {
       console.error('Error response:', error.response?.data);
@@ -174,9 +175,9 @@ const CaptainSignup = () => {
               min="1"
               value={vehicleCapacity}
               onChange={(e) => {
-                const value = parseInt(e.target.value);
-                if (!isNaN(value) && value >= 1) {
-                  setVehicleCapacity(value.toString());
+                const value = e.target.value;
+                if (value === '' || (!isNaN(value) && parseInt(value) >= 1)) {
+                  setVehicleCapacity(value);
                 }
               }}
               placeholder="Vehicle Capacity (minimum 1)"
