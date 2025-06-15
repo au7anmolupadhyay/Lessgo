@@ -12,7 +12,7 @@ function RidePopUp(props) {
         <i className="ri-arrow-down-wide-fill"></i>
       </h5>
       <h3 className="text-2xl font-semibold mb-4">New Ride Available!</h3>
-      <div className='flex items-center justify-between p-2 bg-[#ecf8f8] rounded-lg'>
+      <div className='flex items-center justify-between p-2 bg-yellow-400 rounded-lg'>
         <div className='flex items-center gap-3'>
             <img className='h-12 w-12 rounded-r-full object-cover' src="https://live.staticflickr.com/5252/5403292396_0804de9bcf_b.jpg" alt="" />
             <h2 className='text-xl font-lg'>Ronaldo Jr.</h2>
@@ -44,13 +44,15 @@ function RidePopUp(props) {
             </div>
           </div>
         </div>
+        <div className='flex w-full items-center justify-between gap-3 mt-5'>
         <button onClick={()=>{
-         props.setConfirmRidePanel(false)}} className="w-full mt-5 bg-green-500 text-white font-semibold p-2 rounded-lg">
-          Confirm
+         props.setConfirmRidePopUpPanel(true)}} className="w-1/2 bg-green-500 text-white font-semibold p-2 rounded-lg">
+          Accept
         </button>
-        <button onClick={()=>{props.setRidePopUpPanel(false)}} className="w-full bg-gray-200 text-gray-700 font-semibold p-2 rounded-lg">
+        <button onClick={()=>{props.setRidePopUpPanel(false)}} className="w-1/2 bg-gray-300 text-gray-700 font-semibold p-2 rounded-lg">
           Ignore
         </button>
+        </div>
       </div>
     </div>
   )
