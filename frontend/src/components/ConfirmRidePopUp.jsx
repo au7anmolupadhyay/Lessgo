@@ -1,7 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 
 function ConfirmRidePopUp(props) {
+
+  const [otp, setOtp] = useState('');
+
+  const submitHandler = (e) =>{
+    e.preventDefault();
+  }
+
   return (
     <div>
       <h5
@@ -13,7 +20,7 @@ function ConfirmRidePopUp(props) {
         <i className="ri-arrow-down-wide-fill"></i>
       </h5>
       <h3 className="text-2xl font-semibold mb-4">Confirm Ride to Start</h3>
-      <div className="flex items-center justify-between p-2 bg-yellow-400 rounded-lg">
+      <div className="flex items-center justify-between p-2 bg-white border-2 border-amber-300 rounded-lg">
         <div className="flex items-center gap-3">
           <img
             className="h-12 w-12 rounded-r-full object-cover"
@@ -52,6 +59,8 @@ function ConfirmRidePopUp(props) {
           <form onSubmit={(e)=>submitHandler(e)}>
             <input 
               type="text" 
+              value={otp}
+              onChange={(e)=>setOtp(e.target.value)}
               className='bg-[#eee] px-4 py-2 font-mono text-base rounded-lg w-full mb-4' 
               placeholder="Enter OTP"
             />

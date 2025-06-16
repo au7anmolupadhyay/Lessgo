@@ -12,7 +12,7 @@ function RidePopUp(props) {
         <i className="ri-arrow-down-wide-fill"></i>
       </h5>
       <h3 className="text-2xl font-semibold mb-4">New Ride Available!</h3>
-      <div className='flex items-center justify-between p-2 bg-yellow-400 rounded-lg'>
+      <div className='flex items-center justify-between p-2 bg-white border-2 border-amber-300 rounded-lg'>
         <div className='flex items-center gap-3'>
             <img className='h-12 w-12 rounded-r-full object-cover' src="https://live.staticflickr.com/5252/5403292396_0804de9bcf_b.jpg" alt="" />
             <h2 className='text-xl font-lg'>Ronaldo Jr.</h2>
