@@ -23,3 +23,40 @@ module.exports.getAddressCoordinate = async (address) => {
         throw error;
     }
 };
+
+
+module.exports.getDistanceTime = async(origin, destination) => {
+    if(!origin || !destination){
+        throw new Error('Origin and Destination are required');
+    }
+
+    const apiKey = process.env.GOOGLE_MAPS_API;
+
+    const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(origin)}&destinations=${encodeURIComponent(destination)}&key=${apiKey}`;
+
+    try{
+        const response = await axios.get(url);
+        if(response.data.status === 'OK'){
+            const rows = response.data.rows;
+            if (!rows || !Array.isArray(rows) || rows.length === 0) {
+                throw new Error('No rows returned from Google Maps API');
+            }
+            const elements = rows[0].elements;
+            if (!elements || !Array.isArray(elements) || elements.length === 0) {
+                throw new Error('No elements returned from Google Maps API');
+            }
+            if(elements[0].status === 'ZERO_RESULTS'){
+                throw new Error('No routes found');
+            }
+
+            return elements[0];
+        }
+        else{
+            throw new Error('Unable to fetch distance and time');
+        }
+
+    }catch(error){
+        console.error(error);
+        throw err;
+    }
+}

@@ -16,3 +16,20 @@ module.exports.getCoordinates = async (req, res, next) => {
     res.status(404).json({ message: "Coordinates not found" });
   }
 };
+
+
+module.exports.getDistanceTime = async(req,res,next) =>{
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+    return res.status(404).json({errors: errors.array()});
+  }
+
+  const {origin , destination } = req.query;
+
+  try{
+    const distanceTime = await mapService.getDistanceTime(origin, destination);
+    res.status(200).json(distanceTime);
+  }catch(error){
+    res.status(404).json({message: ""})
+  }
+}
