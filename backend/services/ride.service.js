@@ -58,9 +58,9 @@ async function getFare(pickup, destination, vehicleType){
     };
 }
 
-module.exports.createRide = async({pickup, destination, vehicleType, userId})=>{
-    if(!pickup || !destination || !vehicleType || !userId){
-        throw new Error('Pickup, destination, vehicleType and userId are required');
+module.exports.createRide = async(user, {pickup, destination, vehicleType})=>{
+    if(!pickup || !destination || !vehicleType || !user){
+        throw new Error('All fields are required');
     }
 
     const fare = await getFare(pickup, destination, vehicleType);
@@ -69,14 +69,12 @@ module.exports.createRide = async({pickup, destination, vehicleType, userId})=>{
         pickup,
         destination,
         vehicleType,
-        userId,
+        user,
         fare,
         status: 'pending'
     });
 
     return ride;
 }
-
-
 
 module.exports.getFare = getFare;
