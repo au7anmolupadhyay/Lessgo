@@ -7,12 +7,14 @@ module.exports.createRide = async(req,res,next)=>{
         return res.status(400).json({errors: errors.array()});
     }
 
-    const { userId, pickup, destination, vehicleType } = req.body;
+    const { pickup, destination, vehicleType } = req.body;
+
+    console.log("RIDE CONTROLLER:", req.body);
 
     try{
-        const ride = await rideService.createRide({ user: req.userId, pickup, destination, vehicleType });
+        const ride = await rideService.createRide(req.user._id, { pickup, destination, vehicleType });
         return res.status(200).json(ride);
     }catch(err){
-        return res.status(400).json({message: err.message});
+        return res.status(400).json({message: "message from ride controller: " + err.message});
     }
 };

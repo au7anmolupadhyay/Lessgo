@@ -33,9 +33,12 @@ async function getFare(pickup, destination, vehicleType){
         throw new Error('Invalid vehicle type. Supported types: auto, car, motorbike');
     }
 
+    const distanceInKm = distanceTime.distance.value / 1000;
+    const durationInMin = distanceTime.duration.value / 60;
+
     // Calculate fare based on distance and time
-    const distanceFare = distanceTime.distance * baseRates[vehicleType];
-    const timeFare = distanceTime.duration * timeRates[vehicleType];
+    const distanceFare = distanceInKm * baseRates[vehicleType];
+    const timeFare = durationInMin * timeRates[vehicleType];
     
     let totalFare = distanceFare + timeFare;
 
@@ -64,13 +67,14 @@ module.exports.createRide = async(user, {pickup, destination, vehicleType})=>{
     }
 
     const fare = await getFare(pickup, destination, vehicleType);
+    console.log("FARE:", fare);
     
     const ride = await rideModel.create({
         pickup,
         destination,
         vehicleType,
         user,
-        fare,
+        fare: fare.totalFare,
         status: 'pending'
     });
 
